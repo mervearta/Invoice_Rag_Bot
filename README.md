@@ -19,3 +19,15 @@ Ayrıca ilgili PDF’in **önizlemesini** de Gradio arayüzünde gösterir.
 ## ⚙️ Kurulum
 ```bash
 pip install -r requirements.txt
+
+📘 Veri Seti ve Model Bilgisi
+
+Bu projede, Sample PDF Invoices
+ deposunda yer alan 1000+ PDF faturadan oluşan açık kaynak veri seti kullanılmıştır.
+Veri setinde farklı müşterilere ait çeşitli fatura örnekleri bulunmaktadır.
+
+Uygulama, her müşteriye ait fatura numaraları üzerinden sorgulama yaparak, ilgili faturanın toplam tutarını otomatik olarak döndürmektedir.
+Bu işlemi gerçekleştirmek için veri ön işleme, indeksleme ve sorgu yanıtlama adımlarını içeren bir RAG (Retrieval-Augmented Generation) mimarisi kullanılmıştır.
+
+Veri setinin tamamı içinden 50 adet fatura seçilerek Chroma vektör veritabanına yüklenmiş ve indekslenmiştir.
+Bu sayede sistem, kullanıcıdan gelen bir “invoice number” sorgusuna göre en ilgili fatura verisini hızlıca bulup yanıtlayabilmektedir.
