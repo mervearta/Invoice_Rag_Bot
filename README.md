@@ -1,33 +1,55 @@
 # 📄 Invoice & Offer RAG Chatbot
 
-Bu proje, PDF faturaları okuyup anlamlandıran **RAG (Retrieval-Augmented Generation)** tabanlı bir chatbot’tur.  
-1000 faturadan seçilen 50 tanesini **Chroma vektör veritabanına** yükleyerek, kullanıcıdan gelen **fatura numarasına göre toplam tutar** sorgularını yanıtlar.  
-Ayrıca ilgili PDF’in **önizlemesini** de Gradio arayüzünde gösterir.
+Bu proje, PDF faturalardan bilgi çıkarıp anlamlandıran **RAG (Retrieval-Augmented Generation)** tabanlı bir chatbot’tur.  
+Kullanıcıdan gelen fatura numarasına göre toplam tutarı ve tarihi yanıtlayabilir, ayrıca ilgili PDF’in **önizlemesini** de Gradio arayüzünde gösterir.
 
 ---
 
-## 🚀 Özellikler
-- **PyMuPDF** ile metin çıkarımı  
-- **Regex** ile `invoice_no`, `date`, `total` alanlarının yakalanması  
-- **SentenceTransformer** tabanlı çok dilli embedding  
-- **Chroma** vektör veritabanı  
-- **Flan-T5** modeli ile yanıt üretimi  
-- **Gradio** arayüzü (PDF önizleme dahil)
+## 📊 Veri Seti
+
+Projede kullanılan PDF faturalar, **[Sample-Pdf-invoices](https://github.com/femstac/Sample-Pdf-invoices)** adlı açık kaynak veri setinden alınmıştır.  
+Bu repo içerisinde **1000’den fazla PDF fatura** yer almaktadır. Her PDF dosyasında farklı müşterilere ait fatura bilgileri (fatura numarası, tarih, toplam tutar vb.) bulunmaktadır.
+
+Proje kapsamında bu veri setinden **50 adet PDF** seçilerek **Chroma vektör veritabanına** eklenmiş ve indekslenmiştir.  
+Uygulama, bu veritabanındaki faturaları sorgulayarak belirli bir **fatura numarasına** ait **toplam tutarı** bulur ve kullanıcıya döndürür.
 
 ---
 
-## ⚙️ Kurulum
-```bash
-pip install -r requirements.txt
+## ⚙️ Yöntem ve Mimarisi
 
-📘 Veri Seti ve Model Bilgisi
+Uygulama, **Retrieval-Augmented Generation (RAG)** mimarisi üzerine kuruludur.  
+Aşağıdaki adımlar takip edilmiştir:
 
-Bu projede, Sample PDF Invoices
- deposunda yer alan 1000+ PDF faturadan oluşan açık kaynak veri seti kullanılmıştır.
-Veri setinde farklı müşterilere ait çeşitli fatura örnekleri bulunmaktadır.
+1. **Veri Hazırlama ve İndeksleme**
+   - PDF dosyalarından metin çıkarımı için **PyMuPDF** (`fitz`) kullanıldı.  
+   - Regex yardımıyla `invoice_no`, `total`, `date` gibi temel alanlar metinden ayrıştırıldı.  
+   - Her fatura metni belirli uzunluklarda parçalara (chunk) bölünerek **ChromaDB** koleksiyonuna eklendi.  
+   - Her parçaya ait embedding’ler, çok dilli bir model ile oluşturuldu.
 
-Uygulama, her müşteriye ait fatura numaraları üzerinden sorgulama yaparak, ilgili faturanın toplam tutarını otomatik olarak döndürmektedir.
-Bu işlemi gerçekleştirmek için veri ön işleme, indeksleme ve sorgu yanıtlama adımlarını içeren bir RAG (Retrieval-Augmented Generation) mimarisi kullanılmıştır.
+2. **Embedding ve LLM Modelleri**
+   - **Embedding modeli:**
+     ```
+     sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+     ```
+     Bu model, Türkçe ve İngilizce dahil olmak üzere çok dilli sorgular için uygundur.
+   - **LLM modeli:**
+     ```
+     google/flan-t5-base
+     ```
+     Kısa ve doğru metin üretimi için kullanılmıştır.
 
-Veri setinin tamamı içinden 50 adet fatura seçilerek Chroma vektör veritabanına yüklenmiş ve indekslenmiştir.
-Bu sayede sistem, kullanıcıdan gelen bir “invoice number” sorgusuna göre en ilgili fatura verisini hızlıca bulup yanıtlayabilmektedir.
+3. **RAG Mantığı**
+   - Kullanıcı, örneğin “What is the total and date for invoice #18843?” sorusunu sorduğunda, sistem Chroma’dan en alakalı döküman parçalarını getirir.  
+   - Bu parçalar, `Flan-T5` modeline bağlam olarak verilerek nihai yanıt üretilir.  
+   - Cevapla birlikte, ilgili PDF’in **önizlemesi** de Gradio arayüzünde gösterilir.
+
+---
+
+## 🧠 Ortam Değişkenleri (Environment Variables)
+
+Uygulama aşağıdaki ortam değişkenleriyle yapılandırılabilir:
+
+```python
+CHROMA_DIR = os.environ.get("CHROMA_DIR", "./chroma_invoices")
+EMB_MODEL  = os.environ.get("EMB_MODEL", "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
+LLM_MODEL  = os.environ.get("LLM_MODEL", "google/flan-t5-base")
