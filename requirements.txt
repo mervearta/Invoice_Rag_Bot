@@ -1,0 +1,9 @@
+chromadb
+sentence-transformers
+transformers
+pymupdf
+pillow
+pdf2image
+gradio
+python-dateutil
+rapidfuzz
