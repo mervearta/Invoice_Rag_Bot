@@ -82,3 +82,27 @@ Proje Hugging Face Spaces üzerinde yayınlanmıştır:
 Bu proje, **RAG mimarisiyle PDF tabanlı bilgi çıkarımı ve sorgulama** sürecini uçtan uca göstermektedir.  
 Kullanıcı, fatura numarasını girerek doğrudan toplam tutarı ve tarihi alabilir.  
 Ayrıca sistem, ilgili PDF’in görsel önizlemesini sunarak yanıtın kaynağını da açık biçimde gösterir.
+
+
+## 🧾 Örnek Sorgular (Test İçin)
+
+Aşağıdaki fatura numaralarını test etmek için kullanabilirsiniz:
+
+```
+36258  
+36259  
+40100  
+4820  
+15978
+```
+
+💬 **Örnek sorgular:**
+```
+What is the total and date for invoice #36258?
+What is the total for invoice #40100?
+15978.
+```
+
+Bu sorguları Hugging Face Spaces üzerinde test edebilirsiniz:  
+👉 [**Invoice & Offer RAG Chatbot (Hugging Face)**](https://huggingface.co/spaces/MerveBaydar/invoice-rag-bot)
+
