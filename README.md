@@ -1,7 +1,7 @@
 # 📄 Invoice & Offer RAG Chatbot
 
 Bu proje, PDF faturalardan bilgi çıkarıp anlamlandıran **RAG (Retrieval-Augmented Generation)** tabanlı bir chatbot’tur.  
-Kullanıcıdan gelen fatura numarasına göre toplam tutarı ve tarihi yanıtlayabilir, ayrıca ilgili PDF’in **önizlemesini** de Gradio arayüzünde gösterir.
+Kullanıcıdan gelen fatura numarasına göre toplam tutarı yanıtlayabilir, ayrıca ilgili PDF’in **önizlemesini** de Gradio arayüzünde gösterir.
 
 ---
 
