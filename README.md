@@ -5,6 +5,15 @@ Kullanıcıdan gelen fatura numarasına göre toplam tutarı ve tarihi yanıtlay
 
 ---
 
+## 📊 Veri Seti
+
+Bu projede, **[Sample-Pdf-invoices](https://github.com/femstac/Sample-Pdf-invoices)** deposundaki **1000+ PDF** fatura kullanılmıştır.  
+Her dosyada farklı müşterilere ait **fatura numarası, tarih ve toplam tutar** gibi alanlar yer almaktadır.  
+Bu veri setinden **50 PDF** seçilerek **Chroma** vektör veritabanına **indekslenmiştir**.  
+Uygulama, girilen **fatura numarasına** göre ilgili faturayı bulur ve **toplam tutarı** (ve istenirse tarihi) döndürür.
+
+---
+
 ## 🚀 Kurulum ve Çalıştırma Adımları
 
 1. **Gerekli bağımlılıkları yükleyin:**
@@ -102,6 +111,9 @@ What is the total and date for invoice #36258?
 What is the total for invoice #40100?
 15978.
 ```
+<img width="1904" height="919" alt="5" src="https://github.com/user-attachments/assets/c6933759-d2bb-4496-89db-9ed35e01c217" />
+
+
 
 Bu sorguları Hugging Face Spaces üzerinde test edebilirsiniz:  
 👉 [**Invoice & Offer RAG Chatbot (Hugging Face)**](https://huggingface.co/spaces/MerveBaydar/invoice-rag-bot)
