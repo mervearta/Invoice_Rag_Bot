@@ -118,3 +118,10 @@ What is the total for invoice #40100?
 Bu sorguları Hugging Face Spaces üzerinde test edebilirsiniz:  
 👉 [**Invoice & Offer RAG Chatbot (Hugging Face)**](https://huggingface.co/spaces/MerveBaydar/invoice-rag-bot)
 
+## ✅ Elde Edilen Sonuçlar
+
+- Fatura numarası verilen örneklerde toplam tutar ve tarih doğru dönmektedir.  
+- PDF önizlemesi, kullanıcıya cevabın kaynağını gösterir.  
+- Çok dilli embedding modeli sayesinde İngilizce ve Türkçe sorgular da desteklenmektedir.
+
+
