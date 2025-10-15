@@ -120,8 +120,8 @@ Bu sorguları Hugging Face Spaces üzerinde test edebilirsiniz:
 
 ## ✅ Elde Edilen Sonuçlar
 
-- Fatura numarası verilen örneklerde toplam tutar ve tarih doğru dönmektedir.  
+- Fatura numarası verilen örneklerde toplam tutar doğru dönmektedir.  
 - PDF önizlemesi, kullanıcıya cevabın kaynağını gösterir.  
-- Çok dilli embedding modeli sayesinde İngilizce ve Türkçe sorgular da desteklenmektedir.
+- Çok dilli embedding modeli sayesinde sorgular da desteklenmektedir.
 
 
